@@ -1,0 +1,75 @@
+a{
+    color: #000;
+}
+#logo{
+    height: 80px;
+    width: 170px;
+}
+.home-box{
+    background-color: #ff5005ef;
+    color: #ffffffef;
+    padding: 30px 20px;
+    border-radius: 8px;
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.custom-header{
+    background-color: #ff5005ef;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.custom-header a{
+    color: white !important;
+}
+.fundo-pag{
+    background-image: url('/images/IMG-FUNDOHOME.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 40px 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.fundo-pag-construcao{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.login-box{
+    background-color: #ecebeb;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.cadastro-box{
+    background-color: #ecebeb;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.label-cadastro{
+    min-width: 60px;
+    font-size: 14px;
+}
+.btn-personalizado {
+  background-color: #ff5005ef; 
+  color: white;
+  border: none;
+}
+
+.btn-personalizado:hover {
+  background-color: #e65c00; /* tom um pouco mais escuro no hover */
+}
+.footer-fixo{
+    position: fixed;
+    bottom: 0;
+    left:  0;
+    width: 100%;
+    padding: 10px;
+    z-index: 1000;
+}

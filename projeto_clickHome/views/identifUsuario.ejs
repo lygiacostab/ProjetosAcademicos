@@ -1,0 +1,52 @@
+    <%- include('partials/_header') %>
+    <div style="height: 80px;"></div>
+  
+  <section class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6 cadastro-box">
+      <h2 class="text-center mb-4">Olá, <%= usuario.nome %></h2>
+
+      <div class="card p-4 shadow">
+        <div class="mb-3 text-center">
+          <strong>SEUS DADOS</strong>
+        </div>
+        <div class="mb-3">
+          <strong>CPF:</strong>
+          <span class="ms-2"><%= usuario.cpf %></span>
+        </div>
+
+        <div class="mb-3">
+          <strong>Nome:</strong>
+          <span class="ms-2"><%= usuario.nome %></span>
+        </div>
+
+        <div class="mb-3">
+          <strong>Sexo:</strong>
+          <span class="ms-2"><%= usuario.sexo %></span>
+        </div>
+
+        <div class="mb-3">
+          <strong>E-mail:</strong>
+          <span class="ms-2"><%= usuario.email %></span>
+        </div>
+         <div class="mb-3 text-center">
+          <p><%= usuario.nome%>, para garantir a segurança dos nossos usuários e a confiabilidade em nossos anúncios, nós propomos uma identificação de identidade afim evitar transtornos e com o desejo todos tenham uma boa experiência em nossa plataforma!</p>
+          <p>Para continuar com a validação do seu cadastro, solicitamos que envie uma selfie ao lado de um documento com foto, por gentileza</p>
+          <p>IMPORTANTE: esse registro é para uso único e exclusivo para validação de identidade na plataforma, respeitando todas as diretrizes de privacidade do usuário</p>
+        </div>
+
+        <div class="d-grid gap-2 mt-4">
+          <a href="/capturaImagem" class="btn btn-dark">REALIZAR VALIDAÇÃO DE IDENTIDADE</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <%- include('partials/_footer') %>
+
+<!-- Script do Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
