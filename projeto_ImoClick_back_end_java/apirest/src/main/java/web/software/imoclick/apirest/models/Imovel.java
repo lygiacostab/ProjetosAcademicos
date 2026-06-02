@@ -15,6 +15,7 @@ public class Imovel {
     private String titulo;
     private String descricao;
     private String endereco;
+    private String tipo;
     private BigDecimal valor;
     
     @CreatedDate
@@ -30,21 +31,24 @@ public class Imovel {
         construtor vazio. */
     }
 
-    public Imovel(String titulo, String descricao, String endereco, BigDecimal valor){
+    public Imovel(String titulo, String descricao, String endereco, String tipo, BigDecimal valor){
         this.titulo = titulo;
         this.descricao = descricao;
         this.endereco = endereco;
+        this.tipo = tipo;
         this.valor = valor;
+
 
         /*PS: esse construtor sem o ID é necessário porque quando criamos um novo registro no banco
         o campo @Id é gerado automaticamente pelo Mongo na hora de salvar. */
     }
 
-    public Imovel(String id, String titulo, String descricao, String endereco, BigDecimal valor){
+    public Imovel(String id, String titulo, String descricao, String endereco, String tipo, BigDecimal valor){
         this.id = id;
         this.titulo = titulo;
         this.descricao = descricao;
         this.endereco = endereco;
+        this.tipo = tipo;
         this.valor = valor;
 
         /*PS: esse construtor é útil para cenários de atualizações (updates) ou quando precisamos
@@ -105,6 +109,14 @@ public class Imovel {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     
