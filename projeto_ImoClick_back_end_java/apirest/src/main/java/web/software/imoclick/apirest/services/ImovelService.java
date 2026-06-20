@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import web.software.imoclick.apirest.DTOs.imovel.ImovelCreateDTO;
 import web.software.imoclick.apirest.DTOs.imovel.ImovelResponseDTO;
 import web.software.imoclick.apirest.DTOs.imovel.ImovelUpdateDTO;
+import web.software.imoclick.apirest.exceptions.BusinessException;
+import web.software.imoclick.apirest.exceptions.ImovelNotFoundException;
 import web.software.imoclick.apirest.models.Imovel;
 import web.software.imoclick.apirest.repositories.ImovelRepository;
 
@@ -52,22 +54,22 @@ public class ImovelService {
     //POST /imovel -> valida regras e salva no MongoDB
     public ImovelResponseDTO cadastrar (ImovelCreateDTO dto){
         if(dto.getValor().compareTo(BigDecimal.ZERO) <= 0 || dto.getValor().compareTo(BigDecimal.ZERO) >=100)
-            throw new IllegalArgumentException("Valor inválido!");
+            throw new BusinessException("Valor inválido!");
         if(dto.getTitulo() == null || dto.getTipo().isBlank())
-            throw new IllegalArgumentException("O título é obrigatório!");
+            throw new BusinessException("O título é obrigatório!");
         if(dto.getDescricao() == null || dto.getDescricao().isBlank())
-            throw new IllegalArgumentException("A descrição é obrigatória!");
+            throw new BusinessException("A descrição é obrigatória!");
         if(dto.getEndereco() == null || dto.getEndereco().isBlank())
-            throw new IllegalArgumentException("O endereço é obrigatório!");
+            throw new BusinessException("O endereço é obrigatório!");
         if(dto.getTipo() == null || dto.getTipo().isBlank())
-            throw new IllegalArgumentException("O tipo é obrigatório!");
+            throw new BusinessException("O tipo é obrigatório!");
         
         return toResponse(repository.save(toEntity(dto)));
     }
 
     //PUT /imovel/{id}
     public ImovelResponseDTO atualizar(String id, ImovelUpdateDTO dto){
-        Imovel entity = repository.findById(id).orElseThrow(() -> new RuntimeException("Imovel não encontrado" +id));
+        Imovel entity = repository.findById(id).orElseThrow(() -> new ImovelNotFoundException("Imovel não encontrado" +id));
         entity.setTitulo(dto.getTitulo());
         entity.setDescricao(dto.getDescricao());
         entity.setEndereco(dto.getEndereco());
@@ -79,7 +81,7 @@ public class ImovelService {
     //DELETE /people/{id}
     public void deletar(String id){
         if(!repository.existsById(id))
-            throw new RuntimeException("Imovel não encontrado: "+ id);
+            throw new ImovelNotFoundException("Imovel não encontrado: "+ id);
         repository.deleteById(id);
     }
 
