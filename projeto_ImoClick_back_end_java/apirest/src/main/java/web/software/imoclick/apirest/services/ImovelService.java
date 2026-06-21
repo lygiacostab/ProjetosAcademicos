@@ -27,6 +27,8 @@ public class ImovelService {
     }
 
     public List<ImovelResponseDTO> buscarPorTitulo(String termo){
+        
+
         return repository.findByTituloContainingIgnoreCase(termo).stream().map(this::toResponse).toList();
     }
 
@@ -40,13 +42,13 @@ public class ImovelService {
 
     public List<ImovelResponseDTO> buscarPorValor(BigDecimal min, BigDecimal max){
         if(min == null || max == null){
-            throw new IllegalArgumentException("Os valores mínimo e máximo são obrigatórios!");
+            throw new BusinessException("Os valores mínimo e máximo são obrigatórios!");
         }
         if(min.compareTo(BigDecimal.ZERO) < 0){
-            throw new IllegalArgumentException("O valor mínimo não pode ser menor que Zero!");
+            throw new BusinessException("O valor mínimo não pode ser menor que Zero!");
         }
         if(min.compareTo(max) > 0){
-            throw new IllegalArgumentException("O valor mínimo não pode ser maior que o valor máximo!");
+            throw new BusinessException("O valor mínimo não pode ser maior que o valor máximo!");
         }
         return repository.findByValorBetween(min, max).stream().map(this::toResponse).toList();
     }

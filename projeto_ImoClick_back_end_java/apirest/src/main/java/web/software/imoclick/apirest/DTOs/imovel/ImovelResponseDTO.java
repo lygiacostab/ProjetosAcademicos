@@ -3,12 +3,21 @@ package web.software.imoclick.apirest.DTOs.imovel;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(description = "Dados de resposta do Imóvel.")
 public class ImovelResponseDTO {
+    @Schema(description = "Identificador único", type = "String", example = "6529e3a7a5845c008f66bb17")
     private String id;
+    @Schema(description = "Título do imóvel", type = "String", example = "Apartamento")
     private String titulo;
+    @Schema(description = "Descrição do imóvel", type = "String", example = "2 quartos, 1 banheiro, 1 cozinha americana")
     private String descricao;
+    @Schema(description = "Endereço do imóvel", type = "String", example = "Rua 01, qd02 lt03 - St. Centro")
     private String endereco;
+    @Schema(description = "Tipo de negociação do imóvel", type = "String", example = "Aluguel")
     private String tipo;
+    @Schema(description = "Valor do imóvel", type = "BigDecimal", example = "1000.00")
     private BigDecimal valor;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
