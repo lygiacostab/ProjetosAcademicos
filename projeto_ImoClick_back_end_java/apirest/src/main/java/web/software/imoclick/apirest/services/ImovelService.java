@@ -27,17 +27,45 @@ public class ImovelService {
     }
 
     public List<ImovelResponseDTO> buscarPorTitulo(String termo){
-        
+        List<ImovelResponseDTO> imoveis = 
+            repository.findByTituloContainingIgnoreCase(termo)
+            .stream()
+            .map(this::toResponse)
+            .toList();
 
-        return repository.findByTituloContainingIgnoreCase(termo).stream().map(this::toResponse).toList();
+        if(imoveis.isEmpty()){
+            throw new ImovelNotFoundException("Nenhum imóvel encontrado com o título: "+ termo);
+        }
+        
+        return imoveis;
     }
 
     public List<ImovelResponseDTO> buscaPorTipo(String tipo){
-        return repository.findByTipo(tipo).stream().map(this::toResponse).toList();
+         List<ImovelResponseDTO> imoveis = 
+            repository.findByTipo(tipo)
+            .stream()
+            .map(this::toResponse)
+            .toList();
+
+        if(imoveis.isEmpty()){
+            throw new ImovelNotFoundException("Nenhum imóvel encontrado com o tipo: "+ tipo);
+        }
+        
+        return imoveis;
     }
 
     public List<ImovelResponseDTO> buscarPorEndereco(String termo){
-        return repository.findByEnderecoContainingIgnoreCase(termo).stream().map(this::toResponse).toList();
+         List<ImovelResponseDTO> imoveis = 
+            repository.findByEnderecoContainingIgnoreCase(termo)
+            .stream()
+            .map(this::toResponse)
+            .toList();
+
+        if(imoveis.isEmpty()){
+            throw new ImovelNotFoundException("Nenhum imóvel encontrado com o endereco: "+ termo);
+        }
+        
+        return imoveis;
     }
 
     public List<ImovelResponseDTO> buscarPorValor(BigDecimal min, BigDecimal max){
