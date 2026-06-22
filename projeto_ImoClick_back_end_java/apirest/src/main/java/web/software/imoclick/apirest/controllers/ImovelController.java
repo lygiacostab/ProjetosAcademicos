@@ -11,18 +11,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import jakarta.validation.Valid;
 import web.software.imoclick.apirest.DTOs.imovel.ImovelCreateDTO;
 import web.software.imoclick.apirest.DTOs.imovel.ImovelResponseDTO;
 import web.software.imoclick.apirest.DTOs.imovel.ImovelUpdateDTO;
@@ -106,7 +105,7 @@ public class ImovelController {
         @ApiResponse(responseCode = "400", description = "Dados inválidos")
     })
     @PostMapping("/post")
-    public ResponseEntity<ImovelResponseDTO> salvar(@RequestBody ImovelCreateDTO dto){
+    public ResponseEntity<ImovelResponseDTO> salvar(@Valid @RequestBody ImovelCreateDTO dto){
         return ResponseEntity.status(HttpStatus.CREATED).body(service.cadastrar(dto));
     }
 
@@ -119,16 +118,7 @@ public class ImovelController {
     public ResponseEntity<ImovelResponseDTO> atualizar(
         @Parameter(description = "ID do Imóvel", example = "6828f7a7a8123c001f11aa11")
         @PathVariable String id, 
-        @RequestBody(
-            description = "Dados do imóvel",
-            required = true,
-            content = @Content(
-                mediaType = "application/json",
-                schema = @Schema(implementation = ImovelUpdateDTO.class)
-            )
-        )
-        
-        ImovelUpdateDTO dto){
+        @Valid @RequestBody ImovelUpdateDTO dto){
        
             return ResponseEntity.ok(service.atualizar(id, dto));
     }

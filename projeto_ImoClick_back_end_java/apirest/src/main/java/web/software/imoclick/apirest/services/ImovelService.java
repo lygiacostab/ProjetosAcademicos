@@ -83,8 +83,10 @@ public class ImovelService {
 
     //POST /imovel -> valida regras e salva no MongoDB
     public ImovelResponseDTO cadastrar (ImovelCreateDTO dto){
-        if(dto.getValor().compareTo(BigDecimal.ZERO) <= 0 || dto.getValor().compareTo(BigDecimal.ZERO) >=100)
-            throw new BusinessException("Valor inválido!");
+
+        BigDecimal valorMaximo = new BigDecimal("10000000000.00");
+        if(dto.getValor().compareTo(BigDecimal.ZERO) <= 0 || dto.getValor().compareTo(valorMaximo) >=0)
+            throw new BusinessException("Valor inválido! Deve ser maior que zero e menor que 10000000000.00");
         if(dto.getTitulo() == null || dto.getTipo().isBlank())
             throw new BusinessException("O título é obrigatório!");
         if(dto.getDescricao() == null || dto.getDescricao().isBlank())
